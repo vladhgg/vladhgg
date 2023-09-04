@@ -53,13 +53,17 @@ local GeneralTab = Window:MakeTab({
   Icon = "rbxassetid://4483345998"
 })
  
+local OtherTab = Window:MakeTab({
+  Name = "Other",
+  Icon = "rbxassetid://4483345998"
+})
 -- Elements
 MainTab:AddParagraph("made by", "pizza")
  
 -- Main
 local autoPunchEnabled = false
  
-MainTab:AddToggle({
+GeneralTab:AddToggle({
     Name = "skip fight",
     Default = false,
     Callback = function(Value)
@@ -75,7 +79,7 @@ MainTab:AddToggle({
 })
  
  
-MainTab:AddToggle({
+GeneralTab:AddToggle({
   Name = "auto punch",
   Default = false,
   Callback = function(value) 
@@ -83,18 +87,38 @@ MainTab:AddToggle({
     autoPunch(autoPunchEnabled)
   end
 })
- 
-MainTab:AddButton({
-    Name = "load tora script",
-    Callback = function()
-		loadstring(game:HttpGet('https://raw.githubusercontent.com/ToraIsMe/ToraIsMe/main/0PUNCH'))()
-    end    
+GeneralTab:AddToggle({
+	Name = "Auto Rebirth",
+	Default = false,
+	Callback = function(rebirth)
+		_G.rebirth = rebirth
+while _G.rebirth and task.wait(0) do
+local args = {
+    [1] = true
+}
+game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("AscendEvent"):FireServer(unpack(args))
+end
+	end    
 })
- 
+
 MainTab:AddButton({
     Name = "load redblue script",
     Callback = function()
 		loadstring(game:HttpGet("https://raw.githubusercontent.com/JustAP1ayer/PlayerHubOther/main/PlayerHubPunchingSimulator.lua", true))()
+    end    
+})
+
+MainTab:AddButton({
+    Name = "load sniper script",
+    Callback = function()
+		loadstring(game:HttpGet("https://raw.githubusercontent.com/JustAP1ayer/PlayerHubOther/main/PlayerHubIngameUgcLimiteds.lua"))()
+    end    
+})
+
+MainTab:AddButton({
+    Name = "load remove pet animation",
+    Callback = function()
+		game.ReplicatedStorage.EggOpenMap:Remove()
     end    
 })
  
@@ -322,7 +346,7 @@ GeneralTab:AddToggle({
     end
   end  
 })
-MainTab:AddTextbox({
+OtherTab:AddTextbox({
 	Name = "Speed",
 	Default = "22",
 	TextDisappear = true,
@@ -335,7 +359,7 @@ while _G.a and task.wait(2) do
 })
 local TpTab = Window:MakeTab({
 	Name = "Teleport",
-	Icon = "nil",
+	Icon = "rbxassetid://4483345998",
 	PremiumOnly = false
 })
 TpTab:AddButton({
