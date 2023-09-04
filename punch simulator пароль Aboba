@@ -1,1029 +1,337 @@
+local Players = game:GetService("Players")
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
+local LocalPlayer = Players.LocalPlayer
+ 
+game:GetService("ProximityPromptService").PromptButtonHoldBegan:Connect(function(prompt)
+			prompt.HoldDuration = 0
+		end)
+ 
+local function autoPunch(enabled)
+  while enabled do
+    ReplicatedStorage.Events.DamageIncreaseOnClickEvent:FireServer()
+    wait() 
+  end
+end
+ 
+local function fireEggs(count, delay, arg)
+  local args = {
+    [1] = tostring(arg) 
+  }
+ 
+  local remote = ReplicatedStorage.Events.PlayerPressedKeyOnEgg
+ 
+  for i = 1, count do
+    remote:FireServer(unpack(args))
+    wait(delay) 
+  end
+ 
+end
+ 
 local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/shlexware/Orion/main/source')))()
-local Window = OrionLib:MakeWindow({Name = "Punch Simulator by Garik6525", HidePremium = false, SaveConfig = true, IntroEnabled = false})
-local KeyTab = Window:MakeTab({
-    Name = "Key",
-    Icon = "nil",
-    PremiumOnly = false
+ 
+-- Main window
+local Window = OrionLib:MakeWindow({
+  Name = "Punch Simulator",
+  HidePremium = false,
+  SaveConfig = true,
+  ConfigFolder = "PunchSimulator"
 })
-KeyTab:AddTextbox({
-    Name = "Key",
-    Default = "",
-    TextDisappear = true,
-    Callback = function(Jump)
-        if Jump == "Aboba" then
-            local MainTab = Window:MakeTab({
-	Name = "Auto",
-	Icon = "nil",
-	PremiumOnly = false
+ 
+-- Tabs
+local MainTab = Window:MakeTab({
+  Name = "Main", 
+  Icon = "rbxassetid://4483345998"
 })
-MainTab:AddToggle({
-	Name = "Auto Punch",
-	Default = false,
-	Callback = function(punch)
-		_G.punch = punch
-while _G.punch and task.wait(0) do
-game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("DamageIncreaseOnClickEvent"):FireServer()
-end
-	end    
-})
-MainTab:AddToggle({
-	Name = "Auto Rebirth",
-	Default = false,
-	Callback = function(rebirth)
-		_G.rebirth = rebirth
-while _G.rebirth and task.wait(0) do
-local args = {
-    [1] = true
-}
-game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("AscendEvent"):FireServer(unpack(args))
-end
-	end    
-})
-MainTab:AddToggle({
-	Name = "Auto Glove",
-	Default = false,
-	Callback = function(glove)
-		_G.glove = glove
-while _G.glove and task.wait(20) do
-local args = {
-    [1] = "Basic"
-}
-game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("ClickedGlovesButton"):FireServer(unpack(args))
-local args = {
-    [1] = "Wood"
-}
-game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("ClickedGlovesButton"):FireServer(unpack(args))
-local args = {
-    [1] = "Iron"
-}
-game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("ClickedGlovesButton"):FireServer(unpack(args))
-local args = {
-    [1] = "Gold"
-}
-game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("ClickedGlovesButton"):FireServer(unpack(args))
-local args = {
-    [1] = "Emerald"
-}
-game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("ClickedGlovesButton"):FireServer(unpack(args))
-local args = {
-    [1] = "Cactus"
-}
-game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("ClickedGlovesButton"):FireServer(unpack(args))
-local args = {
-    [1] = "Pyramid"
-}
-game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("ClickedGlovesButton"):FireServer(unpack(args))
-local args = {
-    [1] = "Spiky"
-}
-game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("ClickedGlovesButton"):FireServer(unpack(args))
-local args = {
-    [1] = "Palm"
-}
-game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("ClickedGlovesButton"):FireServer(unpack(args))
-local args = {
-    [1] = "Desert"
-}
-game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("ClickedGlovesButton"):FireServer(unpack(args))
-local args = {
-    [1] = "Rock"
-}
-game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("ClickedGlovesButton"):FireServer(unpack(args))
-local args = {
-    [1] = "GoldRock"
-}
-game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("ClickedGlovesButton"):FireServer(unpack(args))
-local args = {
-    [1] = "Crystal"
-}
-game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("ClickedGlovesButton"):FireServer(unpack(args))
-local args = {
-    [1] = "GreenCrystal"
-}
-game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("ClickedGlovesButton"):FireServer(unpack(args))
-local args = {
-    [1] = "Obsidian"
-}
-game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("ClickedGlovesButton"):FireServer(unpack(args))
-local args = {
-    [1] = "DriedOcean"
-}
-game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("ClickedGlovesButton"):FireServer(unpack(args))
-local args = {
-    [1] = "Island"
-}
-game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("ClickedGlovesButton"):FireServer(unpack(args))
-local args = {
-    [1] = "Ocean"
-}
-game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("ClickedGlovesButton"):FireServer(unpack(args))
-local args = {
-    [1] = "SunkenShip"
-}
-game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("ClickedGlovesButton"):FireServer(unpack(args))
-local args = {
-    [1] = "Octopus"
-}
-game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("ClickedGlovesButton"):FireServer(unpack(args))
-local args = {
-    [1] = "Peppermint"
-}
-game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("ClickedGlovesButton"):FireServer(unpack(args))
-local args = {
-    [1] = "CandyCane"
-}
-game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("ClickedGlovesButton"):FireServer(unpack(args))
-local args = {
-    [1] = "PinkSweet"
-}
-game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("ClickedGlovesButton"):FireServer(unpack(args))
-local args = {
-    [1] = "Chocolate"
-}
-game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("ClickedGlovesButton"):FireServer(unpack(args))
-local args = {
-    [1] = "Candy"
-}
-game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("ClickedGlovesButton"):FireServer(unpack(args))
-local args = {
-    [1] = "Snowy"
-}
-game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("ClickedGlovesButton"):FireServer(unpack(args))
-local args = {
-    [1] = "Santa"
-}
-game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("ClickedGlovesButton"):FireServer(unpack(args))
-local args = {
-    [1] = "IceSpike"
-}
-game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("ClickedGlovesButton"):FireServer(unpack(args))
-local args = {
-    [1] = "Ice"
-}
-game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("ClickedGlovesButton"):FireServer(unpack(args))
-local args = {
-    [1] = "Snowman"
-}
-game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("ClickedGlovesButton"):FireServer(unpack(args))
-local args = {
-    [1] = "ToyBlock"
-}
-game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("ClickedGlovesButton"):FireServer(unpack(args))
-local args = {
-    [1] = "ToyShape"
-}
-game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("ClickedGlovesButton"):FireServer(unpack(args))
-local args = {
-    [1] = "ToyCar"
-}
-game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("ClickedGlovesButton"):FireServer(unpack(args))
-local args = {
-    [1] = "Teapot"
-}
-game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("ClickedGlovesButton"):FireServer(unpack(args))
-local args = {
-    [1] = "TeddyBear"
-}
-game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("ClickedGlovesButton"):FireServer(unpack(args))
-local args = {
-    [1] = "Cow"
-}
-game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("ClickedGlovesButton"):FireServer(unpack(args))
-local args = {
-    [1] = "Pig"
-}
-game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("ClickedGlovesButton"):FireServer(unpack(args))
-local args = {
-    [1] = "Apple"
-}
-game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("ClickedGlovesButton"):FireServer(unpack(args))
-local args = {
-    [1] = "Carrot"
-}
-game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("ClickedGlovesButton"):FireServer(unpack(args))
-local args = {
-    [1] = "Chicken"
-}
-game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("ClickedGlovesButton"):FireServer(unpack(args))
-local args = {
-    [1] = "Leafy"
-}
-game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("ClickedGlovesButton"):FireServer(unpack(args))
-local args = {
-    [1] = "Bamboo"
-}
-game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("ClickedGlovesButton"):FireServer(unpack(args))
-local args = {
-    [1] = "Ninja"
-}
-game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("ClickedGlovesButton"):FireServer(unpack(args))
-local args = {
-    [1] = "Sakura"
-}
-game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("ClickedGlovesButton"):FireServer(unpack(args))
-local args = {
-    [1] = "Kitsune"
-}
-
-game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("ClickedGlovesButton"):FireServer(unpack(args))
-local args = {
-    [1] = "Moon"
-
-}
-game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("ClickedGlovesButton"):FireServer(unpack(args))
-end
-	end    
-})
-MainTab:AddToggle({
-	Name = "AutoFight",
-	Default = false,
-	Callback = function(fight)
-		_G.fight = fight
-while _G.fight and task.wait(0.1) do
-local damage = game.Players.LocalPlayer.leaderstats.Damage.Value
-if damage >= 50 and damage <= 500 then
-    local args = {
-    [1] = true
-}
-game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("PushEvent"):FireServer(unpack(args))
-wait()
-local args = {
-    [1] = "Fight",
-    [2] = 1,
-    [3] = 1
-}
-game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("AutoFight"):FireServer(unpack(args))
-end
-local damage = game.Players.LocalPlayer.leaderstats.Damage.Value
-if damage >= 501 and damage <= 5000 then
-    local args = {
-    [1] = true
-}
-game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("PushEvent"):FireServer(unpack(args))
-wait()
-local args = {
-    [1] = "Fight",
-    [2] = 1,
-    [3] = 2
-}
-game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("AutoFight"):FireServer(unpack(args))
-end
-local damage = game.Players.LocalPlayer.leaderstats.Damage.Value
-if damage >= 5001 and damage <= 25000 then
-    local args = {
-    [1] = true
-}
-game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("PushEvent"):FireServer(unpack(args))
-wait()
-local args = {
-    [1] = "Fight",
-    [2] = 1,
-    [3] = 3
-}
-game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("AutoFight"):FireServer(unpack(args))
-end
-local damage = game.Players.LocalPlayer.leaderstats.Damage.Value
-if damage >= 25001 and damage <= 31250 then
-    local args = {
-    [1] = true
-}
-game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("PushEvent"):FireServer(unpack(args))
-wait()
-local args = {
-    [1] = "Fight",
-    [2] = 1,
-    [3] = 4
-}
-game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("AutoFight"):FireServer(unpack(args))
-end
-local damage = game.Players.LocalPlayer.leaderstats.Damage.Value
-if damage >= 31250 and damage <= 156000 then
-    local args = {
-    [1] = true
-}
-game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("PushEvent"):FireServer(unpack(args))
-wait()
-local args = {
-    [1] = "Fight",
-    [2] = 2,
-    [3] = 1
-}
-game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("AutoFight"):FireServer(unpack(args))
-end
-local damage = game.Players.LocalPlayer.leaderstats.Damage.Value
-if damage >= 156000 and damage <= 765000 then
-    local args = {
-    [1] = true
-}
-game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("PushEvent"):FireServer(unpack(args))
-wait()
-local args = {
-    [1] = "Fight",
-    [2] = 2,
-    [3] = 2
-}
-game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("AutoFight"):FireServer(unpack(args))
-end
-local damage = game.Players.LocalPlayer.leaderstats.Damage.Value
-if damage >= 765000 and damage <= 2180000 then
-    local args = {
-    [1] = true
-}
-game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("PushEvent"):FireServer(unpack(args))
-wait()
-local args = {
-    [1] = "Fight",
-    [2] = 2,
-    [3] = 3
-}
-game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("AutoFight"):FireServer(unpack(args))
-end
-local damage = game.Players.LocalPlayer.leaderstats.Damage.Value
-if damage >= 2180000 and damage <= 3100000 then
-    local args = {
-    [1] = true
-}
-game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("PushEvent"):FireServer(unpack(args))
-wait()
-local args = {
-    [1] = "Fight",
-    [2] = 2,
-    [3] = 4
-}
-game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("AutoFight"):FireServer(unpack(args))
-end
-local damage = game.Players.LocalPlayer.leaderstats.Damage.Value
-if damage >= 3100000 and damage <= 15500000 then
-    local args = {
-    [1] = true
-}
-game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("PushEvent"):FireServer(unpack(args))
-wait()
-local args = {
-    [1] = "Fight",
-    [2] = 3,
-    [3] = 1
-}
-game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("AutoFight"):FireServer(unpack(args))
-end
-local damage = game.Players.LocalPlayer.leaderstats.Damage.Value
-if damage >= 15500000 and damage <= 77500000 then
-    local args = {
-    [1] = true
-}
-game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("PushEvent"):FireServer(unpack(args))
-wait()
-local args = {
-    [1] = "Fight",
-    [2] = 3,
-    [3] = 2
-}
-game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("AutoFight"):FireServer(unpack(args))
-end
-local damage = game.Players.LocalPlayer.leaderstats.Damage.Value
-if damage >= 77500000 and damage <= 217000000 then
-    local args = {
-    [1] = true
-}
-game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("PushEvent"):FireServer(unpack(args))
-wait()
-local args = {
-    [1] = "Fight",
-    [2] = 3,
-    [3] = 3
-}
-game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("AutoFight"):FireServer(unpack(args))
-end
-local damage = game.Players.LocalPlayer.leaderstats.Damage.Value
-if damage >= 217000000 and damage <= 375000000 then
-    local args = {
-    [1] = true
-}
-game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("PushEvent"):FireServer(unpack(args))
-wait()
-local args = {
-    [1] = "Fight",
-    [2] = 3,
-    [3] = 4
-}
-game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("AutoFight"):FireServer(unpack(args))
-end
-local damage = game.Players.LocalPlayer.leaderstats.Damage.Value
-if damage >= 375000000 and damage <= 1625000000 then
-    local args = {
-    [1] = true
-}
-game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("PushEvent"):FireServer(unpack(args))
-wait()
-local args = {
-    [1] = "Fight",
-    [2] = 4,
-    [3] = 1
-}
-game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("AutoFight"):FireServer(unpack(args))
-end
-local damage = game.Players.LocalPlayer.leaderstats.Damage.Value
-if damage >= 1625000000 and damage <= 9350000000 then
-    local args = {
-    [1] = true
-}
-game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("PushEvent"):FireServer(unpack(args))
-wait()
-local args = {
-    [1] = "Fight",
-    [2] = 4,
-    [3] = 2
-}
-game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("AutoFight"):FireServer(unpack(args))
-end
-local damage = game.Players.LocalPlayer.leaderstats.Damage.Value
-if damage >= 9350000000 and damage <= 26250000000 then
-    local args = {
-    [1] = true
-}
-game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("PushEvent"):FireServer(unpack(args))
-wait()
-local args = {
-    [1] = "Fight",
-    [2] = 4,
-    [3] = 3
-}
-game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("AutoFight"):FireServer(unpack(args))
-end
-local damage = game.Players.LocalPlayer.leaderstats.Damage.Value
-if damage >= 26250000000 and damage <= 60000000000 then
-    local args = {
-    [1] = true
-}
-game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("PushEvent"):FireServer(unpack(args))
-wait()
-local args = {
-    [1] = "Fight",
-    [2] = 4,
-    [3] = 4
-}
-game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("AutoFight"):FireServer(unpack(args))
-end
-local damage = game.Players.LocalPlayer.leaderstats.Damage.Value
-if damage >= 60000000000 and damage <= 300000000000 then
-    local args = {
-    [1] = true
-}
-game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("PushEvent"):FireServer(unpack(args))
-wait()
-local args = {
-    [1] = "Fight",
-    [2] = 5,
-    [3] = 1
-}
-game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("AutoFight"):FireServer(unpack(args))
-end
-local damage = game.Players.LocalPlayer.leaderstats.Damage.Value
-if damage >= 300000000000 and damage <= 1500000000000 then
-    local args = {
-    [1] = true
-}
-game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("PushEvent"):FireServer(unpack(args))
-wait()
-local args = {
-    [1] = "Fight",
-    [2] = 5,
-    [3] = 2
-}
-game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("AutoFight"):FireServer(unpack(args))
-end
-local damage = game.Players.LocalPlayer.leaderstats.Damage.Value
-if damage >= 1500000000000 and damage <= 4200000000000 then
-    local args = {
-    [1] = true
-}
-game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("PushEvent"):FireServer(unpack(args))
-wait()
-local args = {
-    [1] = "Fight",
-    [2] = 5,
-    [3] = 3
-}
-game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("AutoFight"):FireServer(unpack(args))
-end
-local damage = game.Players.LocalPlayer.leaderstats.Damage.Value
-if damage >= 4200000000000 and damage <= 12500000000000 then
-    local args = {
-    [1] = true
-}
-game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("PushEvent"):FireServer(unpack(args))
-wait()
-local args = {
-    [1] = "Fight",
-    [2] = 5,
-    [3] = 4
-}
-game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("AutoFight"):FireServer(unpack(args))
-end
-local damage = game.Players.LocalPlayer.leaderstats.Damage.Value
-if damage >= 12500000000000 and damage <= 62500000000000 then
-    local args = {
-    [1] = true
-}
-game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("PushEvent"):FireServer(unpack(args))
-wait()
-local args = {
-    [1] = "Fight",
-    [2] = 6,
-    [3] = 1
-}
-game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("AutoFight"):FireServer(unpack(args))
-end
-local damage = game.Players.LocalPlayer.leaderstats.Damage.Value
-if damage >= 62500000000000 and damage <= 312500000000000 then
-    local args = {
-    [1] = true
-}
-game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("PushEvent"):FireServer(unpack(args))
-wait()
-local args = {
-    [1] = "Fight",
-    [2] = 6,
-    [3] = 2
-}
-game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("AutoFight"):FireServer(unpack(args))
-end
-local damage = game.Players.LocalPlayer.leaderstats.Damage.Value
-if damage >= 312500000000000 and damage <= 875000000000000 then
-    local args = {
-    [1] = true
-}
-game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("PushEvent"):FireServer(unpack(args))
-wait()
-local args = {
-    [1] = "Fight",
-    [2] = 6,
-    [3] = 3
-}
-game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("AutoFight"):FireServer(unpack(args))
-end
-local damage = game.Players.LocalPlayer.leaderstats.Damage.Value
-if damage >= 875000000000000 and damage <= 1350000000000000 then
-    local args = {
-    [1] = true
-}
-game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("PushEvent"):FireServer(unpack(args))
-wait()
-local args = {
-    [1] = "Fight",
-    [2] = 6,
-    [3] = 4
-}
-game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("AutoFight"):FireServer(unpack(args))
-end
-local damage = game.Players.LocalPlayer.leaderstats.Damage.Value
-if damage >= 1350000000000000 and damage <= 6750000000000000 then
-    local args = {
-    [1] = true
-}
-game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("PushEvent"):FireServer(unpack(args))
-wait()
-local args = {
-    [1] = "Fight",
-    [2] = 7,
-    [3] = 1
-}
-game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("AutoFight"):FireServer(unpack(args))
-end
-local damage = game.Players.LocalPlayer.leaderstats.Damage.Value
-if damage >= 6750000000000000 and damage <= 33000000000000000 then
-    local args = {
-    [1] = true
-}
-game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("PushEvent"):FireServer(unpack(args))
-wait()
-local args = {
-    [1] = "Fight",
-    [2] = 7,
-    [3] = 2
-}
-game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("AutoFight"):FireServer(unpack(args))
-end
-local damage = game.Players.LocalPlayer.leaderstats.Damage.Value
-if damage >= 33000000000000000 and damage <= 94500000000000000 then
-    local args = {
-    [1] = true
-}
-game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("PushEvent"):FireServer(unpack(args))
-wait()
-local args = {
-    [1] = "Fight",
-    [2] = 7,
-    [3] = 3
-}
-game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("AutoFight"):FireServer(unpack(args))
-end
-local damage = game.Players.LocalPlayer.leaderstats.Damage.Value
-if damage >= 94500000000000000 and damage <= 145000000000000000 then
-    local args = {
-    [1] = true
-}
-game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("PushEvent"):FireServer(unpack(args))
-wait()
-local args = {
-    [1] = "Fight",
-    [2] = 7,
-    [3] = 4
-}
-game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("AutoFight"):FireServer(unpack(args))
-end
-local damage = game.Players.LocalPlayer.leaderstats.Damage.Value
-if damage >= 145000000000000000 and damage <= 725000000000000000 then
-    local args = {
-    [1] = true
-}
-game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("PushEvent"):FireServer(unpack(args))
-wait()
-local args = {
-    [1] = "Fight",
-    [2] = 8,
-    [3] = 1
-}
-game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("AutoFight"):FireServer(unpack(args))
-end
-local damage = game.Players.LocalPlayer.leaderstats.Damage.Value
-if damage >= 725000000000000000 and damage <= 3625000000000000000 then
-    local args = {
-    [1] = true
-}
-game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("PushEvent"):FireServer(unpack(args))
-wait()
-local args = {
-    [1] = "Fight",
-    [2] = 8,
-    [3] = 2
-}
-game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("AutoFight"):FireServer(unpack(args))
-end
-local damage = game.Players.LocalPlayer.leaderstats.Damage.Value
-if damage >= 3625000000000000000 and damage <= 10150000000000000000 then
-    local args = {
-    [1] = true
-}
-game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("PushEvent"):FireServer(unpack(args))
-wait()
-local args = {
-    [1] = "Fight",
-    [2] = 8,
-    [3] = 3
-}
-game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("AutoFight"):FireServer(unpack(args))
-end
-local damage = game.Players.LocalPlayer.leaderstats.Damage.Value
-if damage >= 10150000000000000000 and damage <= 15000000000000000000 then
-    local args = {
-    [1] = true
-}
-game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("PushEvent"):FireServer(unpack(args))
-wait()
-local args = {
-    [1] = "Fight",
-    [2] = 8,
-    [3] = 4
-}
-game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("AutoFight"):FireServer(unpack(args))
-end
-local damage = game.Players.LocalPlayer.leaderstats.Damage.Value
-if damage >= 15000000000000000000 and damage <= 75000000000000000000 then
-    local args = {
-    [1] = true
-}
-game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("PushEvent"):FireServer(unpack(args))
-wait()
-local args = {
-    [1] = "Fight",
-    [2] = 9,
-    [3] = 1
-}
-game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("AutoFight"):FireServer(unpack(args))
-end
-local damage = game.Players.LocalPlayer.leaderstats.Damage.Value
-if damage >= 75000000000000000000 and damage <= 325000000000000000000 then
-    local args = {
-    [1] = true
-}
-game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("PushEvent"):FireServer(unpack(args))
-wait()
-local args = {
-    [1] = "Fight",
-    [2] = 9,
-    [3] = 2
-}
-game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("AutoFight"):FireServer(unpack(args))
-end
-local damage = game.Players.LocalPlayer.leaderstats.Damage.Value
-if damage >= 325000000000000000000 and damage <= 1050000000000000000000 then
-    local args = {
-    [1] = true
-}
-game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("PushEvent"):FireServer(unpack(args))
-wait()
-local args = {
-    [1] = "Fight",
-    [2] = 9,
-    [3] = 3
-}
-game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("AutoFight"):FireServer(unpack(args))
-end
-if damage >= 1050000000000000000000 and damage <= 105000000000000000000000 then
-    local args = {
-    [1] = true
-}
-game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("PushEvent"):FireServer(unpack(args))
-wait()
-local args = {
-    [1] = "Fight",
-    [2] = 9,
-    [3] = 4
-}
-game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("AutoFight"):FireServer(unpack(args))
-end
-end
-	end    
-})
-MainTab:AddToggle({
-	Name = "Dungeon",
-	Default = false,
-	Callback = function(dungeon)
-		_G.dungeon = dungeon
-while _G.dungeon and task.wait(3) do
-local args = {
-    [1] = "StartDungeon"
-}
-game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("DungeonEvent"):FireServer(unpack(args))
-end
-	end    
-})
-MainTab:AddToggle({
-	Name = "AutoGift",
-	Default = false,
-	Callback = function(Gift)
-		_G.gift = Gift
-while _G.gift and task.wait(5) do
-local args = {
-    [1] = 1
-}
-game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("PlaytimeRewardUpdateEvent"):FireServer(unpack(args))
-local args = {
-    [1] = 2
-}
-game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("PlaytimeRewardUpdateEvent"):FireServer(unpack(args))
-local args = {
-    [1] = 3
-}
-game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("PlaytimeRewardUpdateEvent"):FireServer(unpack(args))
-local args = {
-    [1] = 4
-}
-game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("PlaytimeRewardUpdateEvent"):FireServer(unpack(args))
-local args = {
-    [1] = 5
-}
-game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("PlaytimeRewardUpdateEvent"):FireServer(unpack(args))
-local args = {
-    [1] = 6
-}
-game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("PlaytimeRewardUpdateEvent"):FireServer(unpack(args))
-local args = {
-    [1] = 7
-}
-game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("PlaytimeRewardUpdateEvent"):FireServer(unpack(args))
-local args = {
-    [1] = 8
-}
-game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("PlaytimeRewardUpdateEvent"):FireServer(unpack(args))
-local args = {
-    [1] = 9
-}
-game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("PlaytimeRewardUpdateEvent"):FireServer(unpack(args))
-local args = {
-    [1] = 10
-}
-game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("PlaytimeRewardUpdateEvent"):FireServer(unpack(args))
-local args = {
-    [1] = 11
-}
-game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("PlaytimeRewardUpdateEvent"):FireServer(unpack(args))
-local args = {
-    [1] = 12
-}
-game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("PlaytimeRewardUpdateEvent"):FireServer(unpack(args))
-end
-	end    
-})
+ 
 local EggTab = Window:MakeTab({
-	Name = "Egg",
-	Icon = "nil",
-	PremiumOnly = false
+  Name = "Egg",
+  Icon = "rbxassetid://4483345998" 
 })
-EggTab:AddToggle({
-	Name = "AutoEquipBest",
-	Default = false,
-	Callback = function(Equip)
-		_G.equip = Equip
-while _G.equip and task.wait(5) do
-game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("EquipBest"):InvokeServer()
-end
-	end    
+ 
+local GeneralTab = Window:MakeTab({
+  Name = "General",
+  Icon = "rbxassetid://4483345998"
 })
+ 
+-- Elements
+MainTab:AddParagraph("made by", "pizza")
+ 
+-- Main
+local autoPunchEnabled = false
+ 
+MainTab:AddToggle({
+    Name = "skip fight",
+    Default = false,
+    Callback = function(Value)
+        _G.skipfight = Value
+        while _G.skipfight and task.wait() do
+			local args = {
+				[1] = true
+			}
+ 
+			game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("PushEvent"):FireServer(unpack(args))
+		end
+    end
+})
+ 
+ 
+MainTab:AddToggle({
+  Name = "auto punch",
+  Default = false,
+  Callback = function(value) 
+    autoPunchEnabled = value
+    autoPunch(autoPunchEnabled)
+  end
+})
+ 
+MainTab:AddButton({
+    Name = "load tora script",
+    Callback = function()
+		loadstring(game:HttpGet('https://raw.githubusercontent.com/ToraIsMe/ToraIsMe/main/0PUNCH'))()
+    end    
+})
+ 
+MainTab:AddButton({
+    Name = "load redblue script",
+    Callback = function()
+		loadstring(game:HttpGet("https://raw.githubusercontent.com/JustAP1ayer/PlayerHubOther/main/PlayerHubPunchingSimulator.lua", true))()
+    end    
+})
+ 
+ 
+ 
 EggTab:AddToggle({
   Name = "Hide Animation",
   Default = false,
-  Callback = function(Egg)
-    HideAnimation = Egg
-    while HideAnimation and task.wait() do
+  Callback = function(Value)
+    autoHideAnimation = Value
+    while autoHideAnimation and task.wait() do
       if workspace.Camera:FindFirstChild("EggOpenMap") then
         workspace.Camera:FindFirstChild("EggOpenMap"):Destroy()
       end
     end
+  end  
+})
+ 
+EggTab:AddToggle({
+  Name = "Auto Hatch Gem Egg",
+  Default = false,
+  Callback = function(Value)
+    autoBreakGemEgg = Value
+    while autoBreakGemEgg and task.wait() do
+		local args = {
+			[1] = "VisitEgg"
+		}
+ 
+		game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("PlayerPressedKeyOnEgg"):FireServer(unpack(args))
+    end
   end
 })
+ 
 EggTab:AddToggle({
-	Name = "Forest Egg1",
-	Default = false,
-	Callback = function(Egg)
-		_G.e = Egg
-while _G.e and task.wait(0.1) do
-local args = {
-    [1] = "1"
-}
-game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("PlayerPressedKeyOnEgg"):FireServer(unpack(args))
-end
-	end    
+  Name = "Auto Hatch Forest Egg",
+  Default = false,
+  Callback = function(Value)
+    autoBreakEgg1 = Value
+    while autoBreakEgg1 and task.wait() do
+      local args = {
+        [1] = "1"  
+      }
+      game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("PlayerPressedKeyOnEgg"):FireServer(unpack(args))
+    end
+  end
 })
+ 
 EggTab:AddToggle({
-	Name = "Forest Egg2",
-	Default = false,
-	Callback = function(Egg)
-		_G.e = Egg
-while _G.e and task.wait(0.1) do
-local args = {
-    [1] = "Forest2"
-}
-game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("PlayerPressedKeyOnEgg"):FireServer(unpack(args))
-end
-	end    
+  Name = "Auto Hatch Desert Egg",
+  Default = false,
+  Callback = function(Value)
+    autoBreakEgg2 = Value
+    while autoBreakEgg2 and task.wait() do
+      local args = {
+        [1] = "2"  
+      }
+      game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("PlayerPressedKeyOnEgg"):FireServer(unpack(args))
+    end
+  end
 })
+ 
 EggTab:AddToggle({
-	Name = "Desert Egg",
-	Default = false,
-	Callback = function(Egg)
-		_G.e = Egg
-while _G.e and task.wait(0.1) do
-local args = {
-    [1] = "2"
-}
-game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("PlayerPressedKeyOnEgg"):FireServer(unpack(args))
-end
-	end    
+  Name = "Auto Hatch Cave Egg",
+  Default = false,
+  Callback = function(Value)
+    autoBreakEgg2 = Value
+    while autoBreakEgg2 and task.wait() do
+      local args = {
+        [1] = "3"  
+      }
+      game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("PlayerPressedKeyOnEgg"):FireServer(unpack(args))
+    end
+  end
 })
+ 
 EggTab:AddToggle({
-	Name = "Cave Egg",
-	Default = false,
-	Callback = function(Egg)
-		_G.e = Egg
-while _G.e and task.wait(0.1) do
-local args = {
-    [1] = "3"
-}
-game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("PlayerPressedKeyOnEgg"):FireServer(unpack(args))
-end
-	end    
+  Name = "Auto Hatch Ocean Egg",
+  Default = false,
+  Callback = function(Value)
+    autoBreakEgg2 = Value
+    while autoBreakEgg2 and task.wait() do
+      local args = {
+        [1] = "4"  
+      }
+      game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("PlayerPressedKeyOnEgg"):FireServer(unpack(args))
+    end
+  end
 })
+ 
 EggTab:AddToggle({
-	Name = "Ocean Egg",
-	Default = false,
-	Callback = function(Egg)
-		_G.e = Egg
-while _G.e and task.wait(0.1) do
-local args = {
-    [1] = "4"
-}
-game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("PlayerPressedKeyOnEgg"):FireServer(unpack(args))
-end
-	end    
+  Name = "Auto Hatch Candy Egg",
+  Default = false,
+  Callback = function(Value)
+    autoBreakEgg2 = Value
+    while autoBreakEgg2 and task.wait() do
+      local args = {
+        [1] = "5"  
+      }
+      game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("PlayerPressedKeyOnEgg"):FireServer(unpack(args))
+    end
+  end
 })
+ 
 EggTab:AddToggle({
-	Name = "Candy Egg",
-	Default = false,
-	Callback = function(Egg)
-		_G.e = Egg
-while _G.e and task.wait(0.1) do
-local args = {
-    [1] = "5"
-}
-game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("PlayerPressedKeyOnEgg"):FireServer(unpack(args))
-end
-	end    
+  Name = "Auto Hatch Snow Egg",
+  Default = false,
+  Callback = function(Value)
+    autoBreakEgg2 = Value
+    while autoBreakEgg2 and task.wait() do
+      local args = {
+        [1] = "6"  
+      }
+      game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("PlayerPressedKeyOnEgg"):FireServer(unpack(args))
+    end
+  end
 })
+ 
 EggTab:AddToggle({
-	Name = "Snow Egg",
-	Default = false,
-	Callback = function(Egg)
-		_G.e = Egg
-while _G.e and task.wait(0.1) do
-local args = {
-    [1] = "6"
-}
-game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("PlayerPressedKeyOnEgg"):FireServer(unpack(args))
-end
-	end    
+  Name = "Auto Hatch Toy Egg",
+  Default = false,
+  Callback = function(Value)
+    autoBreakEgg2 = Value
+    while autoBreakEgg2 and task.wait() do
+      local args = {
+        [1] = "7"  
+      }
+      game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("PlayerPressedKeyOnEgg"):FireServer(unpack(args))
+    end
+  end
 })
+ 
 EggTab:AddToggle({
-	Name = "Toy Egg",
-	Default = false,
-	Callback = function(Egg)
-		_G.e = Egg
-while _G.e and task.wait(0.1) do
-local args = {
-    [1] = "7"
-}
-game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("PlayerPressedKeyOnEgg"):FireServer(unpack(args))
-end
-	end    
+  Name = "Auto Hatch Farm Egg",
+  Default = false,
+  Callback = function(Value)
+    autoBreakEgg8 = Value
+    while autoBreakEgg8 and task.wait() do
+      local args = {
+        [1] = "8"  
+      }
+      game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("PlayerPressedKeyOnEgg"):FireServer(unpack(args))
+    end
+  end
 })
+ 
 EggTab:AddToggle({
-	Name = "Farm Egg",
-	Default = false,
-	Callback = function(Egg)
-		_G.e = Egg
-while _G.e and task.wait(0.1) do
-local args = {
-    [1] = "8"
-}
-game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("PlayerPressedKeyOnEgg"):FireServer(unpack(args))
-end
-	end    
+  Name = "Auto Hatch Samurai Egg",
+  Default = false,
+  Callback = function(Value)
+    autoBreakEgg9 = Value
+    while autoBreakEgg9 and task.wait() do
+      local args = {
+        [1] = "9"  
+      }
+      game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("PlayerPressedKeyOnEgg"):FireServer(unpack(args))
+    end
+  end
 })
+ 
 EggTab:AddToggle({
-	Name = "Samurai Egg",
-	Default = false,
-	Callback = function(Egg)
-		_G.e = Egg
-while _G.e and task.wait(0.1) do
-local args = {
-    [1] = "9"
-}
-game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("PlayerPressedKeyOnEgg"):FireServer(unpack(args))
-end
-	end    
+  Name = "Auto Hatch Space Egg",
+  Default = false,
+  Callback = function(Value)
+    autoBreakEgg10 = Value
+    while autoBreakEgg10 and task.wait() do
+      local args = {
+        [1] = "10"  
+      }
+      game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("PlayerPressedKeyOnEgg"):FireServer(unpack(args))
+    end
+  end
 })
+ 
 EggTab:AddToggle({
-	Name = "Summer Egg",
-	Default = false,
-	Callback = function(Egg)
-		_G.e = Egg
-while _G.e and task.wait(0.1) do
-local args = {
-    [1] = "SummerEgg"
-}
-game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("PlayerPressedKeyOnEgg"):FireServer(unpack(args))
-end
-	end    
+  Name = "Auto Hatch Magic Forest Egg",
+  Default = false,
+  Callback = function(Value)
+    autoBreakEgg11 = Value
+    while autoBreakEgg11 and task.wait() do
+      local args = {
+        [1] = "11"  
+      }
+      game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("PlayerPressedKeyOnEgg"):FireServer(unpack(args))
+    end
+  end
 })
+ 
 EggTab:AddToggle({
-	Name = "Space Egg",
-	Default = false,
-	Callback = function(Egg)
-		_G.e = Egg
-while _G.e and task.wait(0.1) do
-local args = {
-    [1] = "10"
-}
-game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("PlayerPressedKeyOnEgg"):FireServer(unpack(args))
-end
-	end    
+  Name = "Auto Hatch Heaves",
+  Default = false,
+  Callback = function(Value)
+    autoBreakEgg12 = Value
+    while autoBreakEgg12 and task.wait() do
+      local args = {
+        [1] = "12"  
+      }
+      game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("PlayerPressedKeyOnEgg"):FireServer(unpack(args))
+    end
+  end
 })
-EggTab:AddToggle({
-	Name = "Magical Forest",
-	Default = false,
-	Callback = function(Egg)
-		_G.e = Egg
-while _G.e and task.wait(0.1) do
-local args = {
-    [1] = "11"
-}
-game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("PlayerPressedKeyOnEgg"):FireServer(unpack(args))
-end
-	end    
+GeneralTab:AddToggle({
+  Name = "Claim UGC",
+  Default = false,
+  Callback = function(Value)
+    autoClaimUGC = Value
+    while autoClaimUGC and task.wait(0.5) do
+	  local args = {
+	      [1] = "LegendaryHatchEvent"
+	  }
+ 
+	  game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("NewUGCEvents"):WaitForChild("ClickedEventClaimButton"):FireServer(unpack(args))
+    end
+  end  
 })
-EggTab:AddToggle({
-	Name = "Heaven",
-	Default = false,
-	Callback = function(Egg)
-		_G.e = Egg
-while _G.e and task.wait(0.1) do
-local args = {
-    [1] = "12"
-}
-game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("PlayerPressedKeyOnEgg"):FireServer(unpack(args))
-end
-	end    
+ 
+ 
+GeneralTab:AddToggle({
+  Name = "Claim UGC 2",
+  Default = false,
+  Callback = function(Value)
+    autoClaimUGC2 = Value
+    while autoClaimUGC2 and task.wait(0.5) do
+	  game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("ClickedAxolotlEventClaimButton"):FireServer()
+ 
+    end
+  end  
+})
+MainTab:AddTextbox({
+	Name = "Speed",
+	Default = "22",
+	TextDisappear = true,
+	Callback = function(Speed)
+	_G.a = true
+while _G.a and task.wait(2) do
+		game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = Speed
+		end
+	end	  
 })
 local TpTab = Window:MakeTab({
 	Name = "Teleport",
@@ -1150,33 +458,4 @@ TpTab:AddButton({
 game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("TeleportEvent"):InvokeServer(unpack(args))
   	end    
 })
-local OtherTab = Window:MakeTab({
-	Name = "Other",
-	Icon = "nil",
-	PremiumOnly = false
-})
-OtherTab:AddTextbox({
-	Name = "Speed",
-	Default = "22",
-	TextDisappear = true,
-	Callback = function(Speed)
-	_G.a = true
-while _G.a and task.wait(2) do
-		game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = Speed
-		end
-	end	  
-})
-OtherTab:AddTextbox({
-	Name = "Jump",
-	Default = "50",
-	TextDisappear = true,
-	Callback = function(Jump)
-	_G.a = true
-while _G.a and task.wait(2) do
-		game.Players.LocalPlayer.Character.Humanoid.JumpPower = Jump
-		end
-	end	  
-})
-        end
-    end
-})
+OrionLib:Init()
