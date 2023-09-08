@@ -1,0 +1,134 @@
+local Players = game:GetService("Players")
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
+local LocalPlayer = Players.LocalPlayer
+ 
+game:GetService("ProximityPromptService").PromptButtonHoldBegan:Connect(function(prompt)
+            prompt.HoldDuration = 0
+        end)
+ 
+local function autoPunch(enabled)
+  while enabled do
+    ReplicatedStorage.Events.DamageIncreaseOnClickEvent:FireServer()
+    wait() 
+  end
+end
+ 
+local function fireEggs(count, delay, arg)
+  local args = {
+    [1] = tostring(arg) 
+  }
+ 
+  local remote = ReplicatedStorage.Events.PlayerPressedKeyOnEgg
+ 
+  for i = 1, count do
+    remote:FireServer(unpack(args))
+    wait(delay) 
+  end
+ 
+end
+ 
+local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/shlexware/Orion/main/source')))()
+ 
+-- Main window
+local Window = OrionLib:MakeWindow({
+  Name = "Script",
+  HidePremium = false,
+  SaveConfig = true,
+  ConfigFolder = "Script"
+})
+ 
+
+-- Tabs
+local ScriptTab = Window:MakeTab({
+  Name = "Script", 
+  Icon = "rbxassetid://4483345998"
+})
+local MainTab = Window:MakeTab({
+  Name = "Main", 
+  Icon = "rbxassetid://4483345998"
+  })
+  ScriptTab:AddButton({
+    Name = "sniper",
+    Callback = function()
+		loadstring(game:HttpGet("https://raw.githubusercontent.com/JustAP1ayer/PlayerHubOther/main/PlayerHubIngameUgcLimiteds.lua"))()
+    end    
+    })
+    ScriptTab:AddButton({
+    Name = "infinity yed",
+    Callback = function()
+		loadstring(game:HttpGet(('https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source'),true))()
+    end    
+    })
+    ScriptTab:AddButton({
+    Name = "click tp",
+    Callback = function()
+		mouse = game.Players.LocalPlayer:GetMouse()
+tool = Instance.new("Tool")
+tool.RequiresHandle = false
+tool.Name = "Equip to Click TP"
+tool.Activated:connect(function()
+local pos = mouse.Hit+Vector3.new(0,2.5,0)
+pos = CFrame.new(pos.X,pos.Y,pos.Z)
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = pos
+end)
+tool.Parent = game.Players.LocalPlayer.Backpack
+
+    end    
+    })
+    ScriptTab:AddButton({
+    Name = "fly gui",
+    Callback = function()
+		loadstring(game:HttpGet("https://raw.githubusercontent.com/XNEOFF/FlyGuiV3/main/FlyGuiV3.txt"))()
+    end    
+    })
+    ScriptTab:AddButton({
+    Name = "DEX",
+    Callback = function()
+		loadstring(game:HttpGet('https://ithinkimandrew.site/scripts/tools/dark-dex.lua'))()
+    end    
+    })
+    ScriptTab:AddButton({
+    Name = "Rejoin",
+    Callback = function()
+		-- rejoin		
+local TeleportService = game:GetService("TeleportService")
+local Players = game:GetService("Players")
+local LocalPlayer = Players.LocalPlayer
+ 
+local Rejoin = coroutine.create(function()
+    local Success, ErrorMessage = pcall(function()
+        TeleportService:Teleport(game.PlaceId, LocalPlayer)
+    end)
+ 
+    if ErrorMessage and not Success then
+        warn(ErrorMessage)
+    end
+end)
+ 
+coroutine.resume(Rejoin)
+
+    end   
+ })
+MainTab:AddTextbox({
+    Name = "Speed",
+    Default = "22",
+    TextDisappear = true,
+    Callback = function(Speed)
+    _G.a = true
+while _G.a and task.wait(2) do
+        game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = Speed
+        end
+    end      
+    })
+MainTab:AddTextbox({
+	Name = "Jump",
+	Default = "50",
+	TextDisappear = true,
+	Callback = function(Jump)
+	_G.a = true
+while _G.a and task.wait(2) do
+		game.Players.LocalPlayer.Character.Humanoid.JumpPower = Jump
+		end
+	end	  
+    })
+    OrionLib:Init()
